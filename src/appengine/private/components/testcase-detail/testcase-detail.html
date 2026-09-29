@@ -204,7 +204,7 @@
         </div>
         <div class="section">
           <div class="title">
-            Overview          
+            Overview
           </div>
           <div class="body">
             <table cellpadding="0" cellspacing="0" class="overview">
@@ -435,9 +435,9 @@
                     <if-else condition="[[shouldShowDuplicateStatus(info)]]">
                       <span slot="t">
                         <a href="/testcase-detail/[[info.testcase.duplicate_of]]">Duplicate of testcase [[info.testcase.duplicate_of]]</a>
-                        <template is="dom-if" if="[[info.is_admin]]">
-                          <paper-icon-button icon="highlight-off" toggles active="{{removeDuplicateDialogOpened}}" title="Remove the duplicate status"></paper-icon-button>
-                        </template>
+                        <span title="Remove the duplicate status (admin only).">
+                          <paper-icon-button icon="highlight-off" toggles disabled$="[[!info.is_admin]]" active="{{removeDuplicateDialogOpened}}"></paper-icon-button>
+                        </span>
                       </span>
                       <span slot="f">
                         <if-else condition="[[shouldShowPendingStatus(info)]]">
@@ -470,7 +470,7 @@
               <td class="label">
                 <span class="help" title="Whether or not the crash is fixed. If yes, please see the fixed revision range below.">Fixed:</span>
               </td>
-              <td colspan="5" class="value">               
+              <td colspan="5" class="value">
                 <if-else condition="[[info.metadata.progression_pending]]">
                   <span slot="t">Pending</span>
                   <span slot="f">
@@ -483,7 +483,7 @@
                             <if-else condition="[[isNA(info.fixed)]]">
                               <span slot="t">Unable to determine fixed status as testcase is invalid.</span>
                               <span slot="f">[[info.fixed]]</span>
-                            </if-else> 
+                            </if-else>
                             <template is="dom-repeat" items="[[fixedHelpText(info)]]">
                               <iron-icon class="fixed-help" icon="icons:help-outline" title="[[item]]"></iron-icon>
                             </template>
@@ -797,4 +797,3 @@
     });
   </script>
 </dom-module>
-
